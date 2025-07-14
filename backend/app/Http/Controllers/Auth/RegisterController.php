@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -74,7 +74,7 @@ class RegisterController extends Controller
                 'is_active' => true,
                 'is_staff' => false,
             ]);
-            
+
             return response()->json([
                 "success" => "User created successfully. Please verify your email to activate your account."
             ], 201);
