@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -61,10 +61,10 @@ class RegisterController extends Controller
      * @param RegisterRequest $request
      * @return JsonResponse
      */
-    public function register(RegisterRequest $request): JsonResponse {
-        try {
-            $validated = $request->validated();
+    public function register(RegisterRequest $request): JsonResponse {        
+        $validated = $request->validated();
 
+        try {
             User::create([
                 'first_name' => $validated['first_name'],
                 'last_name' => $validated['last_name'],
@@ -78,13 +78,9 @@ class RegisterController extends Controller
             return response()->json([
                 "success" => "User created successfully. Please verify your email to activate your account."
             ], 201);
-        } catch (QueryException $e) {
-            return response()->json([
-                'errors' => $e->getMessage()
-            ], 400);
         } catch (\Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
+                "error" => $e->getMessage()
             ], 500);
         }
     }
