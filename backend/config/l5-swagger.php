@@ -23,8 +23,8 @@ return [
                 'use_absolute_path' => env('L5_SWAGGER_USE_ABSOLUTE_PATH', true),
 
                 /*
-                * Edit to set path where swagger ui assets should be stored
-                */
+                 * Edit to set path where swagger ui assets should be stored
+                 */
                 'swagger_ui_assets_path' => env('L5_SWAGGER_UI_ASSETS_PATH', 'vendor/swagger-api/swagger-ui/dist/'),
 
                 /*
@@ -46,7 +46,10 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                  */
                 'annotations' => [
-                    base_path('app'),
+                    // IMPORTANT: Update these paths to be specific
+                    base_path('app/Http/Controllers'), // Your ProductController path
+                    base_path('app/Models'), // Your Product Model path
+                    base_path('app/Http/OpenApi'), // Your global annotations file path
                 ],
             ],
         ],
@@ -147,7 +150,7 @@ return [
             ],
 
             /**
-             * pattern: string       $pattern File pattern(s) to scan (default: *.php) .
+             * pattern: string      $pattern File pattern(s) to scan (default: *.php) .
              *
              * @see \OpenApi\scan
              */
@@ -169,7 +172,7 @@ return [
 
         /*
          * API security definitions. Will be generated into documentation file.
-        */
+         */
         'securityDefinitions' => [
             'securitySchemes' => [
                 /*
@@ -318,3 +321,4 @@ return [
         ],
     ],
 ];
+
