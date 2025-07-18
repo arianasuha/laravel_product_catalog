@@ -833,22 +833,6 @@
             }
         }
     },
-    "components": {
-        "securitySchemes": {
-            "sanctum": {
-                "type": "http",
-                "scheme": "bearer"
-            }
-        }
-    },
-    "components": {
-        "securitySchemes": {
-            "sanctum": {
-                "type": "http",
-                "scheme": "bearer"
-            }
-        }
-    },
     "tags": [
         {
             "name": "Authentication",

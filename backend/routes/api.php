@@ -36,3 +36,8 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])
 
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
 ->name('api.edit');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('api.logout');
+});
