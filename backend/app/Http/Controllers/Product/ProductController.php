@@ -17,25 +17,13 @@ use OpenApi\Annotations as OA;
 class ProductController extends Controller
 {
     /**
-     * Create a new ProductController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // Apply the 'auth' middleware to all methods in this controller.
-        // This ensures only authenticated users can access these product routes.
-        // $this->middleware('auth');
-    }
-
-    /**
      * @OA\Get(
      * path="/api/products",
      * operationId="getProductsList",
      * tags={"Products"},
      * summary="Get list of products",
      * description="Returns list of products with pagination. Requires authentication.",
-     * security={{"bearerAuth":{}}},
+     * security={ {"sanctum": {} } },
      * @OA\Parameter(
      * name="page",
      * in="query",
@@ -89,21 +77,13 @@ class ProductController extends Controller
     }
 
     /**
-     * [Not for API: Only returns product creation HTML view]
-     */
-    public function create()
-    {
-        return view('products.create');
-    }
-
-    /**
      * @OA\Post(
      * path="/api/products",
      * operationId="storeProduct",
      * tags={"Products"},
      * summary="Store a newly created product",
      * description="Stores a new product in the database. Requires authentication.",
-     * security={{"bearerAuth":{}}},
+     * security={ {"sanctum": {} } },
      * @OA\RequestBody(
      * required=true,
      * @OA\MediaType(
@@ -198,7 +178,7 @@ class ProductController extends Controller
      * tags={"Products"},
      * summary="Get product information",
      * description="Returns product data by ID. Requires authentication.",
-     * security={{"bearerAuth":{}}},
+     * security={ {"sanctum": {} } },
      * @OA\Parameter(
      * name="id",
      * in="path",
@@ -239,16 +219,7 @@ class ProductController extends Controller
      */
     public function show(Product $product): JsonResponse
     {
-        \Log::info('show', [$product]);
         return response()->json($product);
-    }
-
-    /**
-     * [Not for API: Only returns product creation HTML view]
-     */
-    public function edit(Product $product)
-    {
-        return view('products.edit', compact('product'));
     }
 
     /**
@@ -258,7 +229,7 @@ class ProductController extends Controller
      * tags={"Products"},
      * summary="Update existing product",
      * description="Updates an existing product in the database. Requires authentication.",
-     * security={{"bearerAuth":{}}},
+     * security={ {"sanctum": {} } },
      * @OA\Parameter(
      * name="id",
      * in="path",
@@ -379,7 +350,7 @@ class ProductController extends Controller
      * tags={"Products"},
      * summary="Delete existing product",
      * description="Deletes a product and its associated image. Requires authentication.",
-     * security={{"bearerAuth":{}}},
+     * security={ {"sanctum": {} } },
      * @OA\Parameter(
      * name="id",
      * in="path",

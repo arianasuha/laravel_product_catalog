@@ -46,10 +46,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                  */
                 'annotations' => [
-                    // IMPORTANT: Update these paths to be specific
-                    base_path('app/Http/Controllers'), // Your ProductController path
-                    base_path('app/Models'), // Your Product Model path
-                    base_path('app/Http/OpenApi'), // Your global annotations file path
+                    base_path('app'),
                 ],
             ],
         ],
