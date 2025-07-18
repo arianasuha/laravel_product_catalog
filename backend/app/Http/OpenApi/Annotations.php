@@ -11,24 +11,19 @@ use OpenApi\Annotations as OA;
  * description="API documentation for the Product Catalog project",
  * @OA\Contact(
  * email="support@example.com"
- * ),
- * @OA\License(
- * name="Apache 2.0",
- * url="http://www.apache.org/licenses/LICENSE-2.0.html"
- * )
  * )
  *
  * @OA\Server(
  * url=L5_SWAGGER_CONST_HOST,
  * description="Product Catalog API Server"
  * )
- *
+ * 
  * @OA\SecurityScheme(
- * securityScheme="bearerAuth",
- * type="http",
- * scheme="bearer",
- * bearerFormat="JWT"
+ *     securityScheme="sanctum",
+ *     type="http",
+ *     scheme="bearer"
  * )
+ * 
  */
 class Annotations
 {

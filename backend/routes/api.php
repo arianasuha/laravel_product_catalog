@@ -3,10 +3,18 @@
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\AuthController;
 
 Route::post('/register', [RegisterController::class, 'register'])
 ->name('api.register');
+
+Route::post('/login', [AuthController::class, 'login'])
+->name('api.login');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('api.logout');
+});
 
 Route::get('/products', [ProductController::class, 'index'])
 ->name('api.index');
@@ -28,5 +36,3 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])
 
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
 ->name('api.edit');
-
-

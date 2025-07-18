@@ -10,11 +10,12 @@ use \Illuminate\Validation\ValidationException;
 use \Illuminate\Support\Facades\Hash;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasSlug;
+    use HasFactory, Notifiable, HasSlug, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -54,7 +55,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'is_active' => 'boolean',
             'is_staff' => 'boolean',
-            'password' => 'hashed',
         ];
     }
 
