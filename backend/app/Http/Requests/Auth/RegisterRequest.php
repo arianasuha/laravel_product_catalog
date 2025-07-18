@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Validation\Rule;
 use App\Http\Requests\BaseRequest;
+use App\Rules\StrongPassword;
 
 class RegisterRequest extends BaseRequest
 {
@@ -27,7 +28,7 @@ class RegisterRequest extends BaseRequest
             'last_name' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', new StrongPassword()],
         ];
     }
 

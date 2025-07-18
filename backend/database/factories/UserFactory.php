@@ -24,15 +24,17 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail,
-            'username' => $this->faker->unique()->userName,
-            'is_active' => $this->faker->boolean(90),
-            'is_staff' => $this->faker->boolean(10),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'username' => $this->faker->unique()->userName(),
             'email_verified_at' => now(),
+            // Ensure a plain password is set here, so setPasswordAttribute handles hashing
             'password' => static::$password ??= Hash::make('password'),
+            'is_active' => true,
+            'is_staff' => false,
             'remember_token' => Str::random(10),
+            // Slug will be generated automatically by the model's HasSlug trait
         ];
     }
 
@@ -43,6 +45,19 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate a specific password for the user.
+     *
+     * @param string $password
+     * @return $this
+     */
+    public function withPassword(string $password): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'password' => $password,
         ]);
     }
 }
