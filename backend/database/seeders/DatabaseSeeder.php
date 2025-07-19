@@ -38,5 +38,8 @@ class DatabaseSeeder extends Seeder
             'is_staff' => true,
             'email_verified_at' => now(),
         ]);
+
+        // Call the ProductSeeder to add dummy products
+        $this->call(ProductSeeder::class);
     }
 }
