@@ -83,4 +83,11 @@ class Product extends Model
         'stock',
         'image',
     ];
+
+    public function casts() {
+        return [
+            'price' => 'float',
+            'stock' => 'integer',
+        ];
+    }
 }
