@@ -48,10 +48,10 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         // Check password
-        if (!Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password) || !$user->is_active) {
             return response()->json([
-                'errors' => 'Credentials are incorrect.',
-            ]);
+                'errors' => 'Credentials are incorrect.'
+            ], 422);
         }
 
         // Create token with 24-hour expiry

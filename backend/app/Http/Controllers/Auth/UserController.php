@@ -160,17 +160,24 @@ class UserController extends Controller
      * )
      */
     public function show(string $user): JsonResponse
-    {
-        try {
-            // Attempt to find by ID or slug
-            $user = User::where('id', $user)->orWhere('slug', $user)->firstOrFail();
-            return response()->json($user, 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                "error" => $e->getMessage()
-            ], 500);
+{
+    try {
+        $foundUser = User::where('id', $user)
+            ->orWhere('username', $user)
+            ->first();
+
+        if (!$foundUser) {
+            return response()->json(['error' => 'User not found'], 404);
         }
+
+        return response()->json($foundUser, 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            "error" => "An error occurred while retrieving the user.",
+            "details" => $e->getMessage()
+        ], 500);
     }
+}
 
     /**
      * Update a user
