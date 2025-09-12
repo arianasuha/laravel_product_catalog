@@ -26,4 +26,18 @@ class LogRequests
 
         return $response;
     }
+
+    /**
+     * Handle Termination
+     * 
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function terminate(Request $request, Response $response)
+    {
+        Log::info('Server Response', [
+            'method' => $request->method(),
+            'url' => $request->fullUrl(),
+            'status' => $response->getStatusCode(),
+        ]);
+    }
 }
